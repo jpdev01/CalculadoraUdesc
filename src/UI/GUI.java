@@ -19,7 +19,7 @@ public class GUI extends JFrame implements ActionListener {
     
     Calculator calculadora =  new Calculator();
 
-    public boolean isFirstNumber = true;
+    public boolean isFirstValue = true;
 
     public JButton b0;
     public JButton b1;
@@ -38,9 +38,9 @@ public class GUI extends JFrame implements ActionListener {
     public JButton bm;
     public JButton beq;
 
-    public String s0 = "";
-    public String s1 = "";
-    public String s2 = "";
+    public String firstValueInfo = "";
+    public String secondValueInfo = "";
+    public String resultValue = "";
 
     private static final String CLEAR_COMMAND = "C";
 
@@ -119,10 +119,19 @@ public class GUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String selected = e.getActionCommand();
 
+        if (selected.equals(EQUALS_COMMAND)) {
+            calculate();
+            return;
+        }
+        if (selected.equals(CLEAR_COMMAND)) {
+            clear();
+            return;
+        }
+
         Operation operation = Operation.findByOperationSymbol(selected);
         if (operation != null) {
             this.calculadora.setOperation(operation);
-            this.isFirstNumber = !isFirstNumber;
+            this.isFirstValue = !isFirstValue;
             textField.setText("");
         }
 
@@ -130,97 +139,38 @@ public class GUI extends JFrame implements ActionListener {
         commands.add(CLEAR_COMMAND);
         commands.add(EQUALS_COMMAND);
 
-        if (isFirstNumber && !(operation != null || commands.contains(selected))) {
-            this.s0 += selected;
-            textField.setText(s0);
-            calculadora.setFirstOperator(new Double(s0));
-        } else if (!isFirstNumber && !(operation != null || selected.equals("=") || selected.equals("C"))) {
-            this.s1 += selected;
-            textField.setText(s1);
-            calculadora.setSecondOperator(new Double(s1));
+        boolean isNumber = operation == null && !commands.contains(selected);
+        if (isNumber) {
+            if (isFirstValue) {
+                this.firstValueInfo += selected;
+                textField.setText(firstValueInfo);
+                calculadora.setFirstOperator(new Double(firstValueInfo));
+            } else {
+                this.secondValueInfo += selected;
+                textField.setText(secondValueInfo);
+                calculadora.setSecondOperator(new Double(secondValueInfo));
+            }
         }
+    }
 
-        if (selected.equals(EQUALS_COMMAND)) {
-            s2 = String.valueOf(calculadora.execute());
-            textField.setText(s2);
-            s0 = s2;
-            s1 = "";
-        } else if (selected.equals(CLEAR_COMMAND)) {
-            textField.setText("");
-            s0 = "";
-            s1 = "";
-            s2 = "";
-        }
+    private void clear() {
+        textField.setText("");
+        firstValueInfo = "";
+        secondValueInfo = "";
+        resultValue = "";
+    }
 
+    private void calculate() {
+        double result = calculadora.execute();
+        this.resultValue = String.valueOf(result);
+        textField.setText(this.resultValue);
 
+        this.firstValueInfo = this.resultValue;
+        calculadora.setFirstOperator(calculadora.execute());
 
-        // // if the value is a number
-        // if ((selected.charAt(0) >= '0' && selected.charAt(0) <= '9') || selected.charAt(0) == '.') {
-        //     // if operand is present then add to second no
-        //     if (!s1.equals(""))
-        //         s2 = s2 + selected;
-        //     else
-        //         s0 = s0 + selected;
+        this.secondValueInfo = "";
+        calculadora.setSecondOperator(0);
 
-        //     // set the value of text
-        //     textField.setText(s0 + s1 + s2);
-        // } else if (selected.charAt(0) == 'C') {
-        //     // clear the one letter
-        //     s0 = s1 = s2 = "";
-
-        //     // set the value of text
-        //     textField.setText(s0 + s1 + s2);
-        // } else if (selected.charAt(0) == '=') {
-
-        //     double te;
-
-        //     // store the value in 1st
-        //     if (s1.equals("+"))
-        //         te = (Double.parseDouble(s0) + Double.parseDouble(s2));
-        //     else if (s1.equals("-"))
-        //         te = (Double.parseDouble(s0) - Double.parseDouble(s2));
-        //     else if (s1.equals("/"))
-        //         te = (Double.parseDouble(s0) / Double.parseDouble(s2));
-        //     else
-        //         te = (Double.parseDouble(s0) * Double.parseDouble(s2));
-
-        //     // set the value of text
-        //     textField.setText(s0 + s1 + s2 + "=" + te);
-
-        //     // convert it to string
-        //     s0 = Double.toString(te);
-
-        //     s1 = s2 = "";
-        // } else {
-        //     // if there was no operand
-        //     if (s1.equals("") || s2.equals(""))
-        //         s1 = selected;
-        //     // else evaluate
-        //     else {
-        //         double te;
-
-        //         // store the value in 1st
-        //         if (s1.equals("+"))
-        //             te = (Double.parseDouble(s0) + Double.parseDouble(s2));
-        //         else if (s1.equals("-"))
-        //             te = (Double.parseDouble(s0) - Double.parseDouble(s2));
-        //         else if (s1.equals("/"))
-        //             te = (Double.parseDouble(s0) / Double.parseDouble(s2));
-        //         else
-        //             te = (Double.parseDouble(s0) * Double.parseDouble(s2));
-
-        //         // convert it to string
-        //         s0 = Double.toString(te);
-
-        //         // place the operator
-        //         s1 = selected;
-
-        //         // make the operand blank
-        //         s2 = "";
-        //     }
-
-        //     // set the value of text
-        //     textField.setText(s0 + s1 + s2);
-        // }
+        this.isFirstValue = true;
     }
 }
