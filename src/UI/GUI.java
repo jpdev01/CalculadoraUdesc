@@ -119,11 +119,11 @@ public class GUI extends JFrame implements ActionListener {
             textField.setText("");
         }
 
-        if (isFirstNumber && !(selected.equals("+") || selected.equals("-") || selected.equals("*") || selected.equals("/") || selected.equals("=") || selected.equals("C"))) {
+        if (isFirstNumber && !(operation != null || selected.equals("=") || selected.equals("C"))) {
             this.s0 += selected;
             textField.setText(s0.toString());
             calculadora.setOperador1(new Double(s0));
-        } else if (!isFirstNumber && !(selected.equals("+") || selected.equals("-") || selected.equals("*") || selected.equals("/") || selected.equals("=") || selected.equals("C"))) {
+        } else if (!isFirstNumber && !(operation != null || selected.equals("=") || selected.equals("C"))) {
             this.s1 += selected;
             textField.setText(s1.toString());
             calculadora.setOperador2(new Double(s1));
