@@ -26,25 +26,25 @@ public class Calculator {
     }
 
     public double execute() {
-        double resposta = 0.0;
+        double result = 0.0;
 
         validateExecute();
 
         switch (this.operation) {
             case ADICAO:
-                resposta = firstOperator + secondOperator;
+                result = firstOperator + secondOperator;
                 break;
             case SUBTRACAO:
-                resposta = firstOperator - secondOperator;
+                result = firstOperator - secondOperator;
                 break;
             case MULTIPLICACAO:
-                resposta = firstOperator * secondOperator;
+                result = firstOperator * secondOperator;
                 break;
             case DIVISAO:
-                resposta = firstOperator / secondOperator;
+                result = firstOperator / secondOperator;
                 break;
         }
-        return resposta;
+        return result;
     }
 
     private void validateExecute() {

@@ -2,6 +2,8 @@ package UI;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -40,7 +42,12 @@ public class GUI extends JFrame implements ActionListener {
     public String s1 = "";
     public String s2 = "";
 
+    private static final String CLEAR_COMMAND = "C";
+
+    private static final String EQUALS_COMMAND = "=";
+
     public GUI() {
+
         frame = new JFrame("calculator");
 
         textField = new JTextField(16);
@@ -119,22 +126,26 @@ public class GUI extends JFrame implements ActionListener {
             textField.setText("");
         }
 
-        if (isFirstNumber && !(operation != null || selected.equals("=") || selected.equals("C"))) {
+        final List<String> commands = new ArrayList<>();
+        commands.add(CLEAR_COMMAND);
+        commands.add(EQUALS_COMMAND);
+
+        if (isFirstNumber && !(operation != null || commands.contains(selected))) {
             this.s0 += selected;
-            textField.setText(s0.toString());
+            textField.setText(s0);
             calculadora.setFirstOperator(new Double(s0));
         } else if (!isFirstNumber && !(operation != null || selected.equals("=") || selected.equals("C"))) {
             this.s1 += selected;
-            textField.setText(s1.toString());
+            textField.setText(s1);
             calculadora.setSecondOperator(new Double(s1));
         }
 
-        if (selected.equals("=")) {
+        if (selected.equals(EQUALS_COMMAND)) {
             s2 = String.valueOf(calculadora.execute());
             textField.setText(s2);
             s0 = s2;
             s1 = "";
-        } else if (selected.equals("C")) {
+        } else if (selected.equals(CLEAR_COMMAND)) {
             textField.setText("");
             s0 = "";
             s1 = "";
