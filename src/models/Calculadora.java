@@ -27,7 +27,8 @@ public class Calculadora {
 
     public double calcular() {
         double resposta = 0.0;
-        switch(operation) {
+
+        switch(this.operation) {
             case ADICAO:
                 resposta = operador1+operador2;
                 break;

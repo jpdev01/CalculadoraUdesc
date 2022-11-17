@@ -112,21 +112,9 @@ public class GUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String selected = e.getActionCommand();
 
-
-        if (selected.equals("+")) {
-            this.calculadora.setOperation(Operation.ADICAO);
-            this.isFirstNumber = !isFirstNumber;
-            textField.setText("");
-        } else if (selected.equals("-")) {
-            this.calculadora.setOperation(Operation.SUBTRACAO);
-            this.isFirstNumber = !isFirstNumber;
-            textField.setText("");
-        } else if (selected.equals("*")) {
-            this.calculadora.setOperation(Operation.MULTIPLICACAO);
-            this.isFirstNumber = !isFirstNumber;
-            textField.setText("");
-        } else if (selected.equals("/")) {
-            this.calculadora.setOperation(Operation.DIVISAO);
+        Operation operation = Operation.findByOperationSymbol(selected);
+        if (operation != null) {
+            this.calculadora.setOperation(operation);
             this.isFirstNumber = !isFirstNumber;
             textField.setText("");
         }
