@@ -8,14 +8,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import models.Calculadora;
+import models.Calculator;
 import models.Operation;
 
 public class GUI extends JFrame implements ActionListener {
     public static JFrame frame;
     public static JTextField textField;
     
-    Calculadora calculadora =  new Calculadora();
+    Calculator calculadora =  new Calculator();
 
     public boolean isFirstNumber = true;
 
@@ -122,15 +122,15 @@ public class GUI extends JFrame implements ActionListener {
         if (isFirstNumber && !(operation != null || selected.equals("=") || selected.equals("C"))) {
             this.s0 += selected;
             textField.setText(s0.toString());
-            calculadora.setOperador1(new Double(s0));
+            calculadora.setFirstOperator(new Double(s0));
         } else if (!isFirstNumber && !(operation != null || selected.equals("=") || selected.equals("C"))) {
             this.s1 += selected;
             textField.setText(s1.toString());
-            calculadora.setOperador2(new Double(s1));
+            calculadora.setSecondOperator(new Double(s1));
         }
 
         if (selected.equals("=")) {
-            s2 = String.valueOf(calculadora.calcular());
+            s2 = String.valueOf(calculadora.execute());
             textField.setText(s2);
             s0 = s2;
             s1 = "";
