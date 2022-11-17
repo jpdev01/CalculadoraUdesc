@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import models.Calculadora;
-import models.Calculadora.Operation;
 import models.Operation;
 
 public class GUI extends JFrame implements ActionListener {
