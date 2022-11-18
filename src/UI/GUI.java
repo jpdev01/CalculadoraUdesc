@@ -113,10 +113,13 @@ public class GUI extends JFrame implements ActionListener {
         painel.add(b8);
         painel.add(b9);
         painel.add(divisionButton);
-        painel.add(b0);
         painel.add(clearButton);
+        painel.add(b0);
         painel.add(executeButton);
 
+        for (JButton numericButton : numericButtonList) {
+            numericButton.setBackground(Color.ORANGE);
+        }
         painel.setBackground(Color.LIGHT_GRAY);
         frame.add(painel);
 
