@@ -122,8 +122,6 @@ public class GUI extends JFrame implements ActionListener {
 
         frame.setSize(200, 220);
         frame.setVisible(true);
-
-        disableButtons(this.operatorButtonList);
     }
 
     @Override
@@ -141,13 +139,9 @@ public class GUI extends JFrame implements ActionListener {
 
         Operation operation = Operation.findByOperationSymbol(selected);
         if (operation != null) {
-            if (isFirstValue) return;
-
             this.calculadora.setOperation(operation);
             toggleFirstValue();
             textField.setText("");
-            disableButtons(this.operatorButtonList);
-            enableButtons(this.numericButtonList);
             return;
         }
 
@@ -160,8 +154,6 @@ public class GUI extends JFrame implements ActionListener {
             textField.setText(secondValueInfo);
             calculadora.setSecondOperator(new Double(secondValueInfo));
         }
-        disableButtons(this.numericButtonList);
-        enableButtons(this.operatorButtonList);
     }
 
     private void clear() {
@@ -187,17 +179,5 @@ public class GUI extends JFrame implements ActionListener {
 
     private void toggleFirstValue() {
         this.isFirstValue = !this.isFirstValue;
-    }
-
-    private void disableButtons(List<JButton> buttonList) {
-        for (JButton jButton : buttonList) {
-            jButton.setEnabled(false);
-        }
-    }
-
-    private void enableButtons(List<JButton> buttonList) {
-        for (JButton jButton : buttonList) {
-            jButton.setEnabled(true);
-        }
     }
 }
