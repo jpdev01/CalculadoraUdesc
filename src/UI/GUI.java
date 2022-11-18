@@ -124,6 +124,7 @@ public class GUI extends JFrame implements ActionListener {
 
         frame.setSize(200, 220);
         frame.setVisible(true);
+        frame.setResizable(false);
     }
 
     @Override
