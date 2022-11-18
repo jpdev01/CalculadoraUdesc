@@ -133,23 +133,17 @@ public class GUI extends JFrame implements ActionListener {
             this.calculadora.setOperation(operation);
             this.isFirstValue = !isFirstValue;
             textField.setText("");
+            return;
         }
 
-        final List<String> commands = new ArrayList<>();
-        commands.add(CLEAR_COMMAND);
-        commands.add(EQUALS_COMMAND);
-
-        boolean isNumber = operation == null && !commands.contains(selected);
-        if (isNumber) {
-            if (isFirstValue) {
-                this.firstValueInfo += selected;
-                textField.setText(firstValueInfo);
-                calculadora.setFirstOperator(new Double(firstValueInfo));
-            } else {
-                this.secondValueInfo += selected;
-                textField.setText(secondValueInfo);
-                calculadora.setSecondOperator(new Double(secondValueInfo));
-            }
+        if (isFirstValue) {
+            this.firstValueInfo += selected;
+            textField.setText(firstValueInfo);
+            calculadora.setFirstOperator(new Double(firstValueInfo));
+        } else {
+            this.secondValueInfo += selected;
+            textField.setText(secondValueInfo);
+            calculadora.setSecondOperator(new Double(secondValueInfo));
         }
     }
 
