@@ -52,8 +52,7 @@ public class GUI extends JFrame implements ActionListener {
     private ArrayList<JButton> operatorButtonList = new ArrayList();
 
     public GUI() {
-
-        frame = new JFrame("calculator");
+        frame = new JFrame("CALCULADORA");
 
         textField = new JTextField(16);
         textField.setEditable(false);
