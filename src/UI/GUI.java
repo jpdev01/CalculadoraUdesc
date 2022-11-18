@@ -131,7 +131,7 @@ public class GUI extends JFrame implements ActionListener {
         Operation operation = Operation.findByOperationSymbol(selected);
         if (operation != null) {
             this.calculadora.setOperation(operation);
-            this.isFirstValue = !isFirstValue;
+            toggleFirstValue();
             textField.setText("");
             return;
         }
@@ -166,5 +166,9 @@ public class GUI extends JFrame implements ActionListener {
         calculadora.setSecondOperator(0);
 
         this.isFirstValue = true;
+    }
+
+    private void toggleFirstValue() {
+        this.isFirstValue = !this.isFirstValue;
     }
 }
