@@ -120,7 +120,7 @@ public class GUI extends JFrame implements ActionListener {
         frame.add(painel);
 
         frame.setSize(200, 220);
-        frame.show();
+        frame.setVisible(true);
     }
 
     @Override
