@@ -15,6 +15,10 @@ public enum Operation {
         this.operationSymbol = operationSymbol;
     }
 
+    public String getOperationSymbol() {
+        return this.operationSymbol;
+    }
+
     public static Operation findByOperationSymbol(String operationSymbol) {
         try {
             Operation operation = Arrays.stream(Operation.values())

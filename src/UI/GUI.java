@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,12 +31,12 @@ public class GUI extends JFrame implements ActionListener {
     public JButton b7;
     public JButton b8;
     public JButton b9;
-    public JButton beq1;
-    public JButton ba;
-    public JButton bs;
-    public JButton bd;
-    public JButton bm;
-    public JButton beq;
+    public JButton executeButton;
+    public JButton sumButton;
+    public JButton subtractButton;
+    public JButton divisionButton;
+    public JButton multiplicationButton;
+    public JButton clearButton;
 
     public String firstValueInfo = "";
     public String secondValueInfo = "";
@@ -45,6 +45,10 @@ public class GUI extends JFrame implements ActionListener {
     private static final String CLEAR_COMMAND = "C";
 
     private static final String EQUALS_COMMAND = "=";
+
+    private ArrayList<JButton> numericButtonList = new ArrayList();
+
+    private ArrayList<JButton> operatorButtonList = new ArrayList();
 
     public GUI() {
 
@@ -63,19 +67,23 @@ public class GUI extends JFrame implements ActionListener {
         this.b7 = new JButton("7");
         this.b8 = new JButton("8");
         this.b9 = new JButton("9");
-        this.beq1 = new JButton("=");
-        this.ba = new JButton("+");
-        this.bs = new JButton("-");
-        this.bd = new JButton("/");
-        this.bm = new JButton("*");
-        this.beq = new JButton("C");
+        this.numericButtonList.addAll(new ArrayList<>(Arrays.asList(this.b0, this.b1, this.b2, this.b3, this.b4, this.b5, this.b6, this.b7, this.b8, this.b9)));
+
+        this.executeButton = new JButton(EQUALS_COMMAND);
+        this.sumButton = new JButton(Operation.ADICAO.getOperationSymbol());
+        this.subtractButton = new JButton(Operation.SUBTRACAO.getOperationSymbol());
+        this.divisionButton = new JButton(Operation.DIVISAO.getOperationSymbol());
+        this.multiplicationButton = new JButton(Operation.MULTIPLICACAO.getOperationSymbol());
+        this.operatorButtonList.addAll(new ArrayList<>(Arrays.asList(this.sumButton, this.multiplicationButton, this.divisionButton, this.subtractButton)));
+
+        this.clearButton = new JButton(CLEAR_COMMAND);
 
         JPanel painel = new JPanel();
 
-        bm.addActionListener(this);
-        bd.addActionListener(this);
-        bs.addActionListener(this);
-        ba.addActionListener(this);
+        multiplicationButton.addActionListener(this);
+        divisionButton.addActionListener(this);
+        subtractButton.addActionListener(this);
+        sumButton.addActionListener(this);
 
         b9.addActionListener(this);
         b8.addActionListener(this);
@@ -87,28 +95,28 @@ public class GUI extends JFrame implements ActionListener {
         b2.addActionListener(this);
         b1.addActionListener(this);
         b0.addActionListener(this);
-        beq.addActionListener(this);
-        beq1.addActionListener(this);
+        clearButton.addActionListener(this);
+        executeButton.addActionListener(this);
 
         painel.add(textField);
-        painel.add(ba);
+        painel.add(sumButton);
         painel.add(b1);
         painel.add(b2);
         painel.add(b3);
-        painel.add(bs);
+        painel.add(subtractButton);
         painel.add(b4);
         painel.add(b5);
         painel.add(b6);
-        painel.add(bm);
+        painel.add(multiplicationButton);
         painel.add(b7);
         painel.add(b8);
         painel.add(b9);
-        painel.add(bd);
+        painel.add(divisionButton);
         painel.add(b0);
-        painel.add(beq);
-        painel.add(beq1);
+        painel.add(clearButton);
+        painel.add(executeButton);
 
-        painel.setBackground(Color.GRAY);
+        painel.setBackground(Color.LIGHT_GRAY);
         frame.add(painel);
 
         frame.setSize(200, 220);
