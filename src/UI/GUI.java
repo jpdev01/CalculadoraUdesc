@@ -163,6 +163,8 @@ public class GUI extends JFrame implements ActionListener {
         firstValueInfo = "";
         secondValueInfo = "";
         resultValue = "";
+
+        this.calculadora =  new Calculator();
     }
 
     private void calculate() {
