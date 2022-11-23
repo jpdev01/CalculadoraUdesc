@@ -18,7 +18,7 @@ public class GUI extends JFrame implements ActionListener {
     public static JFrame frame;
     public static JTextField textField;
     
-    Calculator calculadora =  new Calculator();
+    Calculator calculator =  new Calculator();
 
     public boolean isFirstValue = true;
 
@@ -142,7 +142,7 @@ public class GUI extends JFrame implements ActionListener {
 
         Operation operation = Operation.findByOperationSymbol(selected);
         if (operation != null) {
-            this.calculadora.setOperation(operation);
+            this.calculator.setOperation(operation);
             toggleFirstValue();
             textField.setText("");
             return;
@@ -151,11 +151,11 @@ public class GUI extends JFrame implements ActionListener {
         if (isFirstValue) {
             this.firstValueInfo += selected;
             textField.setText(firstValueInfo);
-            calculadora.setFirstOperator(new Double(firstValueInfo));
+            calculator.setFirstOperator(new Double(firstValueInfo));
         } else {
             this.secondValueInfo += selected;
             textField.setText(secondValueInfo);
-            calculadora.setSecondOperator(new Double(secondValueInfo));
+            calculator.setSecondOperator(new Double(secondValueInfo));
         }
     }
 
@@ -165,19 +165,19 @@ public class GUI extends JFrame implements ActionListener {
         secondValueInfo = "";
         resultValue = "";
 
-        this.calculadora =  new Calculator();
+        this.calculator =  new Calculator();
     }
 
     private void calculate() {
-        double result = calculadora.execute();
+        double result = calculator.execute();
         this.resultValue = String.valueOf(result);
         textField.setText(this.resultValue);
 
         this.firstValueInfo = this.resultValue;
-        calculadora.setFirstOperator(calculadora.execute());
+        calculator.setFirstOperator(calculator.execute());
 
         this.secondValueInfo = "";
-        calculadora.setSecondOperator(0);
+        calculator.setSecondOperator(0);
 
         this.isFirstValue = true;
     }
