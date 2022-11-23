@@ -78,7 +78,7 @@ public class GUI extends JFrame implements ActionListener {
 
         this.clearButton = new JButton(CLEAR_COMMAND);
 
-        JPanel painel = new JPanel();
+        JPanel panel = new JPanel();
 
         multiplicationButton.addActionListener(this);
         divisionButton.addActionListener(this);
@@ -98,29 +98,29 @@ public class GUI extends JFrame implements ActionListener {
         clearButton.addActionListener(this);
         executeButton.addActionListener(this);
 
-        painel.add(textField);
-        painel.add(sumButton);
-        painel.add(b1);
-        painel.add(b2);
-        painel.add(b3);
-        painel.add(subtractButton);
-        painel.add(b4);
-        painel.add(b5);
-        painel.add(b6);
-        painel.add(multiplicationButton);
-        painel.add(b7);
-        painel.add(b8);
-        painel.add(b9);
-        painel.add(divisionButton);
-        painel.add(clearButton);
-        painel.add(b0);
-        painel.add(executeButton);
+        panel.add(textField);
+        panel.add(sumButton);
+        panel.add(b1);
+        panel.add(b2);
+        panel.add(b3);
+        panel.add(subtractButton);
+        panel.add(b4);
+        panel.add(b5);
+        panel.add(b6);
+        panel.add(multiplicationButton);
+        panel.add(b7);
+        panel.add(b8);
+        panel.add(b9);
+        panel.add(divisionButton);
+        panel.add(clearButton);
+        panel.add(b0);
+        panel.add(executeButton);
 
         for (JButton numericButton : numericButtonList) {
             numericButton.setBackground(Color.ORANGE);
         }
-        painel.setBackground(Color.LIGHT_GRAY);
-        frame.add(painel);
+        panel.setBackground(Color.LIGHT_GRAY);
+        frame.add(panel);
 
         frame.setSize(200, 220);
         frame.setVisible(true);
